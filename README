@@ -1,0 +1,73 @@
+This project was made after me and my friend saw a WebM that resizes itself in Discord,
+so we decided to replicate it
+
+# Patched
+It's funny that, after release, them patched, and after a method in Discord's cache,
+them patched it again
+
+# Setup
+You need to set FFmpeg and ImageMagick's Convert in your environment
+FFmpeg: https://ffmpeg.org/download.html
+ImageMagick: https://imagemagick.org/script/download.php
+It's recommended to install via Package Manager on Linux
+
+Downloads with ready setup (Windows only):
+https://github.com/GRIPPERTV/WebM-Fucker/releases/
+
+# How to use Fucker
+> fucker [Input] [Resolutions] (the two arguments are optional)
+Fucker resize the images In Images folder, convert to WebM in Frames folder,
+and concat every frame into one WebM as Output.webm
+
+If a Audio.aac exists in Workspace, it use this audio
+
+Note #1: Program delete the frames, Audio.aac and Output.web after run
+Note #2: In first run, program will create 3 folders: Workspace, Images & Frames
+
+Input: Input video in program's folder, the program will
+use this video to create the images, Audio.aac and use it
+
+Example: "fucker Input.mp4", extract images and audio
+from Input, and will use the resolutions in second argument.
+
+You can also use this commands to only extract a video's images and audio:
+> ffmpeg -i Input.mp4 "Images/Image %05d.png"
+> ffmpeg -i Input.mp4 -vn -acodec copy "Workspace/Audio.aac"
+
+Resolutions: The resolutions that will be used
+in images, it works in a linear order
+
+Example: "fucker 100x100 200x200", the first image will be 100x100,
+the second one be 200x200, and third be 100x100 etc...
+
+You can combine the two arguments, so "Program Input.mp4 100x100 200x200",
+make the first Input.mp4's image be 100x100, the second one be 200x200 etc...
+
+# Name Pattern
+The program have a "Name Pattern", so you can manually modify a
+specific image's resolution without the argument, it only work
+when you don't use the Input argument, because this argument
+ignores the pattern. To use, just rename the image that you
+want with "&WxH" before extension, W = Width & H = Heigth
+
+Example: "ImageName &100x500.png"
+
+# How to use Replace (only Windows):
+> replace [X] [Y] [Resolution]
+Replace is a program that adds the pattern to the image X to Y
+with the resolution, without needing to manually change all images name
+
+Example: "replace 00001 00003 100x100", change the name of the
+image 1 to 5 with the name pattern in resolution "100x100"
+
+Tree list example:
+Image 00001.png -> Image 00001 &100x100.png
+Image 00002.png -> Image 00002 &100x100.png
+Image 00003.png -> Image 00003 &100x100.png
+
+Note #4: The program just accept images name that have the zeros in X
+Note #5: The zeros in X need to be the same in Y, so you can't
+use "00001 00010" because it can bug the program
+
+Program slow? Well, it uses FFmpeg and ImageMagick to do the trick,
+but you can open a issue with another better program or library
